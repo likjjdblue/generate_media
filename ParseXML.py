@@ -599,7 +599,7 @@ class ParseExcel:
             self.ParseDBSheetRow(rowindex)
 
     def GetResource(self):
-        TmpList=self.NginxNodesList+self.NginxPublishNodesList+self.ElasticsearchNodesList+\
+        TmpNodesList=self.NginxNodesList+self.NginxPublishNodesList+self.ElasticsearchNodesList+\
                 self.RedisNodesList+self.RabbitmqNodesList+self.MysqlNodesList+\
                 self.IDSNodesList+self.MASNodesList+self.CKMNodesList+self.IIPNodesList+\
                 self.IGINodesList+self.IGSNodesList+self.IPMNodesList+self.IRTNodesList+\
@@ -608,13 +608,16 @@ class ParseExcel:
         TmpNodeForWhiteList=deepcopy(nodeinfo.whitelist)
 
         #### 生成IP 白名单 ####
-        for DictItem in TmpList:
+        TmpIPList=[]
+        for DictItem in TmpNodesList:
             for key in DictItem.keys():
                 if DictItem[key]['host']:
-                    TmpNodeForWhiteList['whitelist']['list'].append(DictItem[key]['host'])
+                   TmpIPList.append(DictItem[key]['host'])
+        TmpIPList=list(set(TmpIPList))  ### 去除重复的元素 ###
+        TmpNodeForWhiteList['whitelist']['list']=TmpIPList
         TmpNodeForWhiteList['whitelist']['ip']=','.join(TmpNodeForWhiteList['whitelist']['list'])
-        TmpList.append(TmpNodeForWhiteList)
-        return TmpList
+        TmpNodesList.append(TmpNodeForWhiteList)
+        return TmpNodesList
 
 
     def Run(self):
@@ -654,8 +657,7 @@ class ParseExcel:
 
 
 if __name__=="__main__":
-    tmpObj=ParseExcel(u'海云V8.0精简版部署信息表-宁波出入境检疫局.xls')
+    tmpObj=ParseExcel(u'江门市政府 - 海云V8.0标准版部署信息表_1.1.xls')
     tmpObj.Run()
     tmpObj.GetResource()
-    tmpObj.Display()
 
