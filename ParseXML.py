@@ -613,7 +613,8 @@ class ParseExcel:
                 if DictItem[key]['host']:
                     TmpNodeForWhiteList['whitelist']['list'].append(DictItem[key]['host'])
         TmpNodeForWhiteList['whitelist']['ip']=','.join(TmpNodeForWhiteList['whitelist']['list'])
-        return TmpList.append(TmpNodeForWhiteList)
+        TmpList.append(TmpNodeForWhiteList)
+        return TmpList
 
 
     def Run(self):
