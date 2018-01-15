@@ -92,4 +92,4 @@ def RenderTemplate(typename):
                     os.rename(CurrentFile,os.path.join(item[0],NewFileName))
 
 
-RenderTemplate('iip')
+RenderTemplate('irt')

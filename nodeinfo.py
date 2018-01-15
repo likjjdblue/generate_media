@@ -214,3 +214,11 @@ irtNodeInfo={
         'port':None,
     }
 }
+
+whitelist={
+    'whitelist':{
+        'ip':None,
+        'list':[
+        ]
+    }
+}

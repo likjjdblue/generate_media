@@ -478,7 +478,7 @@ class ParseExcel:
                     self.InvalidRowIndexDBList.append(rowindex)
                     return 1
                 TmpNewCode=deepcopy(nodeinfo.idsDBInfo)
-                TmpNewCode['idsdb']['host']=ip,TmpNewCode['idsdb']['port']=ip,port
+                TmpNewCode['idsdb']['host'],TmpNewCode['idsdb']['port']=ip,port
                 TmpNewCode['idsdb']['database']=database
                 TmpNewCode['idsdb']['user'],TmpNewCode['idsdb']['password']=user,password
                 self.IDSDBList.append(TmpNewCode)
@@ -597,13 +597,24 @@ class ParseExcel:
             raise Exception('"数据库信息"sheet 信息不全!')
         for rowindex  in range(self.SheetObj.nrows):
             self.ParseDBSheetRow(rowindex)
+
     def GetResource(self):
-        return self.NginxNodesList+self.NginxPublishNodesList+self.ElasticsearchNodesList+\
+        TmpList=self.NginxNodesList+self.NginxPublishNodesList+self.ElasticsearchNodesList+\
                 self.RedisNodesList+self.RabbitmqNodesList+self.MysqlNodesList+\
                 self.IDSNodesList+self.MASNodesList+self.CKMNodesList+self.IIPNodesList+\
                 self.IGINodesList+self.IGSNodesList+self.IPMNodesList+self.IRTNodesList+\
                 self.IIPDBList+self.IGIDBList+self.IGSDBList+self.IPMDBList+self.IRTDBList+\
                 self.IDODBList+self.IDSDBList+self.RedisNodesList+self.RabbitmqNodesList
+        TmpNodeForWhiteList=deepcopy(nodeinfo.whitelist)
+
+        #### 生成IP 白名单 ####
+        for DictItem in TmpList:
+            for key in DictItem.keys():
+                if DictItem[key]['host']:
+                    TmpNodeForWhiteList['whitelist']['list'].append(DictItem[key]['host'])
+        TmpNodeForWhiteList['whitelist']['ip']=','.join(TmpNodeForWhiteList['whitelist']['list'])
+        return TmpList.append(TmpNodeForWhiteList)
+
 
     def Run(self):
         self.ParseDeploySheet()
@@ -645,4 +656,5 @@ if __name__=="__main__":
     tmpObj=ParseExcel(u'海云V8.0精简版部署信息表-宁波出入境检疫局.xls')
     tmpObj.Run()
     tmpObj.GetResource()
+    tmpObj.Display()
 
