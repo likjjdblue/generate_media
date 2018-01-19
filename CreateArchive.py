@@ -127,4 +127,4 @@ def RenderTemplate(typename):
 #RenderTemplate('irt')
 #RenderTemplate('ipm')
 #RenderTemplate('igs')
-RenderTemplate('igi')
+#RenderTemplate('igi')
