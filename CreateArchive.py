@@ -10,7 +10,7 @@ import os.path
 import shutil
 
 
-tmpObj=ParseXML.ParseExcel(u'松原市政府海云部署配置_最终.xls')
+tmpObj=ParseXML.ParseExcel(u'海云V8.0精简版部署信息表(南宁_测试).xls')
 tmpObj.Run()
 ContextList=tmpObj.GetResource()
 
