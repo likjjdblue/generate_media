@@ -54,3 +54,11 @@ irtconfig={
 }
 
 
+igiconfig={
+    'filtertype':2,
+    'fiterfiles':[
+        'application.properties'
+    ],
+    'path':'/IGI/source/',
+}
+

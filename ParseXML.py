@@ -102,6 +102,7 @@ class ParseExcel:
         self.IGSNodesList=[]
         self.IPMNodesList=[]
         self.IRTNodesList=[]
+        self.ZABBIXNodeList=[]
 
         #### 下面这些list 存放从“数据库信息”sheet中读取的节点信息####
         self.IIPDBList=[]
@@ -113,6 +114,7 @@ class ParseExcel:
         self.IDSDBList=[]
         self.MASDBList=[]
         self.WECHATDBList=[]
+
 
 
         SheetNamesList=self.BookObj.sheet_names()
@@ -387,11 +389,11 @@ class ParseExcel:
                 if not tmpflag:
                     self.InvalidRowIndexDBList.append(rowindex)
                     return 1
-                TmpNewCode=deepcopy(nodeinfo.iipDBInfo)
-                TmpNewCode['iipdb']['host'],TmpNewCode['iipdb']['port']=ip,port
-                TmpNewCode['iipdb']['database']=database
-                TmpNewCode['iipdb']['user'],TmpNewCode['iipdb']['password']=user,password
-                self.IIPDBList.append(TmpNewCode)
+                TmpNewNode=deepcopy(nodeinfo.iipDBInfo)
+                TmpNewNode['iipdb']['host'],TmpNewNode['iipdb']['port']=ip,port
+                TmpNewNode['iipdb']['database']=database
+                TmpNewNode['iipdb']['user'],TmpNewNode['iipdb']['password']=user,password
+                self.IIPDBList.append(TmpNewNode)
             elif u'问政互动政务' in TmpApplicationName:
                 tmpflag=False   ##这个flag 标记"数据库信息"sheet 是否与"XXXX部署信息"sheet中的信息一致  ###
                 for mysqlnode in self.MysqlNodesList:
@@ -402,11 +404,11 @@ class ParseExcel:
                 if not tmpflag:
                     self.InvalidRowIndexDBList.append(rowindex)
                     return 1
-                TmpNewCode=deepcopy(nodeinfo.igiDBInfo)
-                TmpNewCode['igidb']['host'],TmpNewCode['igidb']['port']=ip,port
-                TmpNewCode['igidb']['database']=database
-                TmpNewCode['igidb']['user'],TmpNewCode['igidb']['password']=user,password
-                self.IGIDBList.append(TmpNewCode)
+                TmpNewNode=deepcopy(nodeinfo.igiDBInfo)
+                TmpNewNode['igidb']['host'],TmpNewNode['igidb']['port']=ip,port
+                TmpNewNode['igidb']['database']=database
+                TmpNewNode['igidb']['user'],TmpNewNode['igidb']['password']=user,password
+                self.IGIDBList.append(TmpNewNode)
             elif TmpApplicationName==u'智能检索':
                 tmpflag=False   ##这个flag 标记"数据库信息"sheet 是否与"XXXX部署信息"sheet中的信息一致  ###
                 for mysqlnode in self.MysqlNodesList:
@@ -417,11 +419,11 @@ class ParseExcel:
                 if not tmpflag:
                     self.InvalidRowIndexDBList.append(rowindex)
                     return 1
-                TmpNewCode=deepcopy(nodeinfo.igsDBInfo)
-                TmpNewCode['igsdb']['host'],TmpNewCode['igsdb']['port']=ip,port
-                TmpNewCode['igsdb']['database']=database
-                TmpNewCode['igsdb']['user'],TmpNewCode['igsdb']['password']=user,password
-                self.IGSDBList.append(TmpNewCode)
+                TmpNewNode=deepcopy(nodeinfo.igsDBInfo)
+                TmpNewNode['igsdb']['host'],TmpNewNode['igsdb']['port']=ip,port
+                TmpNewNode['igsdb']['database']=database
+                TmpNewNode['igsdb']['user'],TmpNewNode['igsdb']['password']=user,password
+                self.IGSDBList.append(TmpNewNode)
             elif TmpApplicationName==u'绩效考核':
                 tmpflag=False   ##这个flag 标记"数据库信息"sheet 是否与"XXXX部署信息"sheet中的信息一致  ###
                 for mysqlnode in self.MysqlNodesList:
@@ -432,11 +434,11 @@ class ParseExcel:
                 if not tmpflag:
                     self.InvalidRowIndexDBList.append(rowindex)
                     return 1
-                TmpNewCode=deepcopy(nodeinfo.ipmDBInfo)
-                TmpNewCode['ipmdb']['host'],TmpNewCode['ipmdb']['port']=ip,port
-                TmpNewCode['ipmdb']['database']=database
-                TmpNewCode['ipmdb']['user'],TmpNewCode['ipmdb']['password']=user,password
-                self.IPMDBList.append(TmpNewCode)
+                TmpNewNode=deepcopy(nodeinfo.ipmDBInfo)
+                TmpNewNode['ipmdb']['host'],TmpNewNode['ipmdb']['port']=ip,port
+                TmpNewNode['ipmdb']['database']=database
+                TmpNewNode['ipmdb']['user'],TmpNewNode['ipmdb']['password']=user,password
+                self.IPMDBList.append(TmpNewNode)
             elif TmpApplicationName==u'统计报表':
                 tmpflag=False   ##这个flag 标记"数据库信息"sheet 是否与"XXXX部署信息"sheet中的信息一致  ###
                 for mysqlnode in self.MysqlNodesList:
@@ -447,11 +449,11 @@ class ParseExcel:
                 if not tmpflag:
                     self.InvalidRowIndexDBList.append(rowindex)
                     return 1
-                TmpNewCode=deepcopy(nodeinfo.irtDBInfo)
-                TmpNewCode['irtdb']['host'],TmpNewCode['irtdb']['port']=ip,port
-                TmpNewCode['irtdb']['database']=database
-                TmpNewCode['irtdb']['user'],TmpNewCode['irtdb']['password']=user,password
-                self.IRTDBList.append(TmpNewCode)
+                TmpNewNode=deepcopy(nodeinfo.irtDBInfo)
+                TmpNewNode['irtdb']['host'],TmpNewNode['irtdb']['port']=ip,port
+                TmpNewNode['irtdb']['database']=database
+                TmpNewNode['irtdb']['user'],TmpNewNode['irtdb']['password']=user,password
+                self.IRTDBList.append(TmpNewNode)
             elif TmpApplicationName==u'运营中心':
                 tmpflag=False   ##这个flag 标记"数据库信息"sheet 是否与"XXXX部署信息"sheet中的信息一致  ###
                 for mysqlnode in self.MysqlNodesList:
@@ -462,11 +464,11 @@ class ParseExcel:
                 if not tmpflag:
                     self.InvalidRowIndexDBList.append(rowindex)
                     return 1
-                TmpNewCode=deepcopy(nodeinfo.idoDBInfo)
-                TmpNewCode['idodb']['host'],TmpNewCode['idodb']['port']=ip,port
-                TmpNewCode['idodb']['database']=database
-                TmpNewCode['idodb']['user'],TmpNewCode['idodb']['password']=user,password
-                self.IDODBList.append(TmpNewCode)
+                TmpNewNode=deepcopy(nodeinfo.idoDBInfo)
+                TmpNewNode['idodb']['host'],TmpNewNode['idodb']['port']=ip,port
+                TmpNewNode['idodb']['database']=database
+                TmpNewNode['idodb']['user'],TmpNewNode['idodb']['password']=user,password
+                self.IDODBList.append(TmpNewNode)
             elif u'ids' in TmpApplicationName:
                 tmpflag=False   ##这个flag 标记"数据库信息"sheet 是否与"XXXX部署信息"sheet中的信息一致  ###
                 for mysqlnode in self.MysqlNodesList:
@@ -477,11 +479,11 @@ class ParseExcel:
                 if not tmpflag:
                     self.InvalidRowIndexDBList.append(rowindex)
                     return 1
-                TmpNewCode=deepcopy(nodeinfo.idsDBInfo)
-                TmpNewCode['idsdb']['host'],TmpNewCode['idsdb']['port']=ip,port
-                TmpNewCode['idsdb']['database']=database
-                TmpNewCode['idsdb']['user'],TmpNewCode['idsdb']['password']=user,password
-                self.IDSDBList.append(TmpNewCode)
+                TmpNewNode=deepcopy(nodeinfo.idsDBInfo)
+                TmpNewNode['idsdb']['host'],TmpNewNode['idsdb']['port']=ip,port
+                TmpNewNode['idsdb']['database']=database
+                TmpNewNode['idsdb']['user'],TmpNewNode['idsdb']['password']=user,password
+                self.IDSDBList.append(TmpNewNode)
             elif u'wechat' in TmpApplicationName:
                 tmpflag=False   ##这个flag 标记"数据库信息"sheet 是否与"XXXX部署信息"sheet中的信息一致  ###
                 for mysqlnode in self.MysqlNodesList:
@@ -492,11 +494,11 @@ class ParseExcel:
                 if not tmpflag:
                     self.InvalidRowIndexDBList.append(rowindex)
                     return 1
-                TmpNewCode=deepcopy(nodeinfo.wechatDBInfo)
-                TmpNewCode['wechatdb']['host'],TmpNewCode['wechatdb']['port']=ip,port
-                TmpNewCode['wechatdb']['database']=database
-                TmpNewCode['wechatdb']['user'],TmpNewCode['wechatdb']['password']=user,password
-                self.WECHATDBList.append(TmpNewCode)
+                TmpNewNode=deepcopy(nodeinfo.wechatDBInfo)
+                TmpNewNode['wechatdb']['host'],TmpNewNode['wechatdb']['port']=ip,port
+                TmpNewNode['wechatdb']['database']=database
+                TmpNewNode['wechatdb']['user'],TmpNewNode['wechatdb']['password']=user,password
+                self.WECHATDBList.append(TmpNewNode)
         elif (u'redis' in TmpSoftwareName) or (u'redis' in TmpApplicationName):
             TmpColContent=self.SheetObj.cell_value(rowindex,self.TmpAccountDetailIndex)
             if len(TmpColContent)==0:
@@ -576,6 +578,43 @@ class ParseExcel:
                     break
             if not tmpflag:
                 self.InvalidRowIndexList.append(rowindex)
+        elif (u'zabbix' in TmpSoftwareName) or (u'zabbix' in TmpApplicationName):
+            #### zabbix的节点信息有点特殊，因为在"XX部署信息"sheet中没有提及，因此无法验证其IP,Port的准确性 ###
+            ###   只能按照只要填了 IP ,PORT ,USER,PASSWORD 就默认是正确的 ####
+            TmpColContent=self.SheetObj.cell_value(rowindex,self.TmpAccountDetailIndex)
+            if len(TmpColContent)==0:
+                self.InvalidRowIndexDBList.append(rowindex)
+                return 1
+
+            ReObj4ip=search(r'IP=([\S]+\n{,1})',TmpColContent,flags=MULTILINE|UNICODE|IGNORECASE)
+            ReObj4port=search(r'port=([\S]+)\n{,1}',TmpColContent,flags=MULTILINE|UNICODE|IGNORECASE)
+            ReObj4user=search(r'User=([\S]+)\n{,1}',TmpColContent,flags=MULTILINE|UNICODE|IGNORECASE)
+            ReObj4password=search(r'Password=([\S]+)\n{,1}',TmpColContent,flags=MULTILINE|UNICODE|IGNORECASE)
+
+            if (not ReObj4ip) or (not ReObj4port) or (not ReObj4user) or (not ReObj4password):
+                self.InvalidRowIndexDBList.append(rowindex)
+                return 1
+
+            ip,port=ReObj4ip.group(1),ReObj4port.group(1)
+            user,password=ReObj4user.group(1),ReObj4password.group(1)
+            try:
+                ip=ip.strip()
+                user=user.strip()
+                password=password.strip()
+                port=port.strip()
+            except:
+                pass
+
+            if (not isIPValid(ip)) or (not isPortNumValid(port)) or (len(user)==0) or (len(password)==0):
+                self.InvalidRowIndexDBList.append(rowindex)
+                return 1
+
+            TmpNewNode=deepcopy(nodeinfo.zabbixNodeInfo)
+            TmpNewNode['zabbix']['host'],TmpNewNode['zabbix']['port']=ip,port
+            TmpNewNode['zabbix']['user'],TmpNewNode['zabbix']['password']=user,password
+            self.ZABBIXNodeList.append(TmpNewNode)
+
+
 
 
 
@@ -604,7 +643,7 @@ class ParseExcel:
                 self.IDSNodesList+self.MASNodesList+self.CKMNodesList+self.IIPNodesList+\
                 self.IGINodesList+self.IGSNodesList+self.IPMNodesList+self.IRTNodesList+\
                 self.IIPDBList+self.IGIDBList+self.IGSDBList+self.IPMDBList+self.IRTDBList+\
-                self.IDODBList+self.IDSDBList+self.RedisNodesList+self.RabbitmqNodesList
+                self.IDODBList+self.IDSDBList+self.RedisNodesList+self.RabbitmqNodesList+self.ZABBIXNodeList
         TmpNodeForWhiteList=deepcopy(nodeinfo.whitelist)
 
         #### 生成IP 白名单 ####
@@ -652,12 +691,13 @@ class ParseExcel:
             print (self.IDSDBList)
             print (self.RedisNodesList)
             print (self.RabbitmqNodesList)
+            print (self.ZABBIXNodeList)
             print ('----------------   输出完毕  ---------')
 
 
 
 if __name__=="__main__":
-    tmpObj=ParseExcel(u'江门市政府 - 海云V8.0标准版部署信息表_1.1.xls')
+    tmpObj=ParseExcel(u'松原市政府海云部署配置_最终.xls')
     tmpObj.Run()
     tmpObj.GetResource()
 
