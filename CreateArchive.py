@@ -10,7 +10,7 @@ import os.path
 import shutil
 
 
-tmpObj=ParseXML.ParseExcel(u'海云V8.0精简版部署信息表(南宁_测试).xls')
+tmpObj=ParseXML.ParseExcel(u'广西南宁 - 海云V8.0标准版部署信息表_0206_2.xls')
 tmpObj.Run()
 ContextList=tmpObj.GetResource()
 
@@ -127,4 +127,4 @@ def RenderTemplate(typename):
 #RenderTemplate('irt')
 #RenderTemplate('ipm')
 #RenderTemplate('igs')
-#RenderTemplate('igi')
+RenderTemplate('igi')

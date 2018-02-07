@@ -647,7 +647,7 @@ class ParseExcel:
         TmpNodeForWhiteList=deepcopy(nodeinfo.whitelist)
 
         #### 生成IP 白名单 ####
-        TmpIPList=[]
+        TmpIPList=['127.0.0.1']
         for DictItem in TmpNodesList:
             for key in DictItem.keys():
                 if DictItem[key]['host']:
@@ -697,7 +697,7 @@ class ParseExcel:
 
 
 if __name__=="__main__":
-    tmpObj=ParseExcel(u'松原市政府海云部署配置_最终.xls')
+    tmpObj=ParseExcel(u'海云V8.0精简版部署信息表-测试部署环境-梁树全.xls')
     tmpObj.Run()
     tmpObj.GetResource()
 
